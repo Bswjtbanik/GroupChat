@@ -47,33 +47,42 @@ class AuthVC: UIViewController {
         }
         
     }
-
+    
     
     @IBAction func twitterBtnWithPress(_ sender: Any) {
-    
-         
         
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+        
+        Twitter.sharedInstance().logIn { (session, error) in
+            
+            if error != nil {
+                print("Twitter login error: \(String(describing: error?.localizedDescription)) ")
+            }
+            else {
+                guard let token = session?.authToken else { return }
+                guard let secret = session?.authTokenSecret else { return }
+                let credential = TwitterAuthProvider.credential(withToken: token, secret: secret)
+                
+                Auth.auth().signIn(with: credential, completion: { (user, error) in
+                    
+                    if error != nil {
+                        print("Failed to login using firebase : \(String(describing: error?.localizedDescription))")
+                    }
+                    
+                })
+                print("Successful twitter ")
+                
+                
+            }
+            
+            
+            
+        }
     }
     
     @IBAction func gmailBtnWithPress(_ sender: Any) {
     }
     
- 
+    
     
     @IBAction func emailBtnWithPress(_ sender: Any) {
         

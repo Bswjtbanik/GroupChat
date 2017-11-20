@@ -11,6 +11,7 @@ target 'GroupChat' do
   pod 'TwitterKit'
   pod 'FacebookCore'
   pod 'FacebookLogin'
+  pod 'GoogleSignIn'
 
   # Pods for GroupChat
 
